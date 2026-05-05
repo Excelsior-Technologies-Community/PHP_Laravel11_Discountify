@@ -1,146 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>➕ Add Product</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <style>
-        /* Reset & Body */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            font-family: 'Roboto', sans-serif;
-            background: #121212;
-            color: #e0e0e0;
+            font-family: 'Poppins', sans-serif;
+            background: #f4f7fb;
+            margin: 0;
         }
 
-        /* Header */
         header {
-            background: linear-gradient(90deg, #00bcd4, #0097a7);
-            padding: 1.5rem;
-            text-align: center;
-            font-size: 2rem;
+            background: #00bcd4;
             color: #fff;
-            font-weight: 700;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
-            border-bottom: 2px solid #00bcd4;
+            text-align: center;
+            padding: 18px;
+            font-size: 22px;
+            font-weight: 600;
         }
 
-        /* Container */
         .container {
             max-width: 500px;
-            margin: 2rem auto;
-            padding: 1rem;
+            margin: 40px auto;
         }
 
-        /* Back Link */
-        a {
-            display: block;
-            margin-bottom: 1rem;
-            color: #00bcd4;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        a:hover {
-            text-decoration: underline;
-            color: #00e5ff;
-        }
-
-        /* Form Card */
-        .create-form {
-            background: #1e1e1e;
-            padding: 2rem;
+        .card {
+            background: #fff;
+            padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.8);
-            border-left: 4px solid #00bcd4;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
         }
 
-        /* Inputs */
-        input[type=text],
-        input[type=number] {
+        a.back {
+            display: inline-block;
+            margin-bottom: 15px;
+            text-decoration: none;
+            color: #00bcd4;
+            font-weight: 500;
+        }
+
+        input {
             width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 1rem;
+            padding: 12px;
+            margin-bottom: 12px;
             border-radius: 8px;
-            border: none;
-            background: #222;
-            color: #e0e0e0;
-            font-size: 1rem;
-            transition: 0.3s;
+            border: 1px solid #ddd;
+            font-size: 14px;
         }
 
-        input[type=text]:focus,
-        input[type=number]:focus {
+        input:focus {
+            border-color: #00bcd4;
             outline: none;
-            box-shadow: 0 0 5px #00bcd4;
         }
 
-        /* Submit Button */
         .btn {
             width: 100%;
-            padding: 0.8rem;
+            padding: 12px;
             border: none;
+            background: #00bcd4;
+            color: #fff;
             border-radius: 8px;
-            background: linear-gradient(90deg, #00bcd4, #00e5ff);
-            font-weight: bold;
-            color: #121212;
+            font-weight: 600;
             cursor: pointer;
-            font-size: 1rem;
-            transition: 0.3s;
         }
 
         .btn:hover {
-            background: linear-gradient(90deg, #0097a7, #00bcd4);
+            background: #0097a7;
         }
 
-        /* Coupons Info */
-        .coupons {
-            color: #aaaaaa;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+        .coupon-box {
+            background: #f1faff;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 14px;
         }
 
-        .coupons strong {
+        .coupon-box strong {
             color: #00bcd4;
+        }
+
+        .preview {
+            background: #f9f9f9;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
         }
     </style>
 </head>
 
 <body>
 
-    <header>➕ Add Product</header>
-    <div class="container">
-        <a href="/cart">← Back to Cart</a>
-        <div class="create-form">
-            <form action="/add-product" method="POST">
-                @csrf
-                <input type="text" name="name" placeholder="Product Name" required>
-                <input type="number" name="price" placeholder="Price" required>
-                <input type="number" name="quantity" placeholder="Quantity" required>
-                <input type="text" name="coupon" placeholder="Coupon Code (optional)">
+<header>➕ Add Product</header>
 
-                @if(!empty($availableCoupons))
-                    <div class="coupons">
-                        Available Coupons:
-                        @foreach($availableCoupons as $code => $value)
-                            <strong>{{ $code }}</strong> ({{ $value }}%) @if(!$loop->last),@endif
-                        @endforeach
-                    </div>
-                @endif
+<div class="container">
 
-                <button class="btn" type="submit">Add Product</button>
-            </form>
-        </div>
+    <a href="/cart" class="back">← Back to Cart</a>
+
+    <div class="card">
+
+        <form action="/add-product" method="POST" id="form">
+            @csrf
+
+            <input type="text" name="name" placeholder="Product Name" required>
+
+            <input type="number" name="price" id="price" placeholder="Price" required>
+
+            <input type="number" name="quantity" id="qty" placeholder="Quantity" required>
+
+            <input type="text" name="coupon" id="coupon" placeholder="Coupon Code (optional)">
+
+            <!-- Coupons -->
+            @if(!empty($availableCoupons))
+                <div class="coupon-box">
+                    Available:
+                    @foreach($availableCoupons as $code => $value)
+                        <strong>{{ $code }}</strong> ({{ $value }}%)
+                        @if(!$loop->last), @endif
+                    @endforeach
+                </div>
+            @endif
+
+            <!-- Preview -->
+            <div class="preview" id="preview">
+                Total: ₹0
+            </div>
+
+            <div class="error" id="error"></div>
+
+            <button class="btn">Add Product</button>
+        </form>
+
     </div>
+</div>
+
+<script>
+    const price = document.getElementById("price");
+    const qty = document.getElementById("qty");
+    const coupon = document.getElementById("coupon");
+    const preview = document.getElementById("preview");
+    const error = document.getElementById("error");
+
+    const coupons = {
+        SAVE10: 10,
+        SAVE20: 20,
+        WELCOME5: 5
+    };
+
+    function calculate() {
+        let p = parseFloat(price.value) || 0;
+        let q = parseInt(qty.value) || 0;
+        let total = p * q;
+
+        let c = coupon.value.toUpperCase();
+        let discount = 5; // global
+
+        if (c && coupons[c]) {
+            discount += coupons[c];
+            error.innerText = "";
+        } else if (c) {
+            error.innerText = "Invalid Coupon!";
+        } else {
+            error.innerText = "";
+        }
+
+        let discountAmount = (total * discount) / 100;
+        let final = total - discountAmount;
+
+        preview.innerHTML = `
+            Subtotal: ₹${total}<br>
+            Discount: ${discount}%<br>
+            Final: ₹${final.toFixed(2)}
+        `;
+    }
+
+    price.addEventListener("input", calculate);
+    qty.addEventListener("input", calculate);
+    coupon.addEventListener("input", calculate);
+</script>
 
 </body>
-
 </html>
