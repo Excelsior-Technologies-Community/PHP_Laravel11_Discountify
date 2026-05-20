@@ -14,7 +14,7 @@ class DiscountController extends Controller
         ['price' => 150, 'quantity' => 1],
     ];
 
-    // ✅ Manual total (ORIGINAL)
+    // Manual total (ORIGINAL)
     $total = collect($items)->sum(function ($item) {
         return $item['price'] * $item['quantity'];
     });
@@ -24,11 +24,11 @@ class DiscountController extends Controller
 
     $discounted = $discount->totalWithDiscount();
 
-    // ✅ Manual tax
+    // Manual tax
     $tax = ($discounted * 18) / 100;
 
     return response()->json([
-        'total' => $total, // 550 ✅
+        'total' => $total, 
         'discounted_total' => $discounted,
         'tax' => $tax,
         'final_total' => $discounted + $tax,

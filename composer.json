@@ -9,6 +9,7 @@
         "php": "^8.2",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
+        "nesbot/carbon": "^3.11",
         "safemood/discountify": "^1.5"
     },
     "require-dev": {
