@@ -3,187 +3,558 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🛒 Professional Cart - Dark Mode</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Discountify Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* Reset & Body */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background: #121212;
-            color: #e0e0e0;
+            background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+            min-height: 100vh;
+            padding: 30px;
+            color: white
         }
 
-        /* Header */
-        header {
-            background: linear-gradient(90deg, #00bcd4, #0097a7);
-            padding: 1.5rem;
-            text-align: center;
-            color: #fff;
-            font-size: 2rem;
-            font-weight: 700;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
-            border-bottom: 2px solid #00bcd4;
-        }
-
-        /* Container */
         .container {
-            max-width: 1100px;
-            margin: 2rem auto;
-            padding: 1rem;
+            max-width: 1350px;
+            margin: auto
         }
 
-        /* Buttons */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px
+        }
+
+        .heading h1 {
+            font-size: 34px;
+            font-weight: 700
+        }
+
+        .heading p {
+            opacity: .7;
+            margin-top: 5px
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px
+        }
+
         .btn {
-            display: inline-block;
-            padding: 0.6rem 1.2rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 500;
+            padding: 12px 20px;
+            border-radius: 12px;
             text-decoration: none;
-            color: #121212;
-            background: linear-gradient(90deg, #00bcd4, #00e5ff);
-            transition: 0.3s;
-            margin-right: 0.5rem;
-            margin-bottom: 1rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(90deg, #06b6d4, #3b82f6);
+            transition: .3s;
+            box-shadow: 0 6px 20px rgba(59, 130, 246, .3)
         }
 
         .btn:hover {
-            background: linear-gradient(90deg, #0097a7, #00bcd4);
+            transform: translateY(-4px)
         }
 
-        /* Product Grid */
-        .products {
+        .analytics {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px
         }
 
-        /* Product Card */
         .card {
-            background: #1e1e1e;
-            border-radius: 12px;
-            padding: 1rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-            transition: 0.3s;
-            border-left: 4px solid #00bcd4;
+            background: rgba(255, 255, 255, .08);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, .08);
+            padding: 25px;
+            border-radius: 22px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .25);
+            transition: .3s
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.9);
+            transform: translateY(-6px)
         }
 
-        .card h3 {
-            color: #00bcd4;
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
+        .card h4 {
+            opacity: .7;
+            font-size: 14px;
+            margin-bottom: 10px
         }
 
-        .card p {
-            margin: 0.3rem 0;
-            font-size: 1rem;
-            color: #cccccc;
+        .card h2 {
+            font-size: 30px;
+            font-weight: 700
         }
 
-        .coupon-badge {
+        .search {
+            position: relative;
+            margin-bottom: 25px
+        }
+
+        .search input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border: none;
+            outline: none;
+            background: rgba(255, 255, 255, .08);
+            border-radius: 14px;
+            color: white;
+            font-size: 15px
+        }
+
+        .search span {
+            position: absolute;
+            left: 18px;
+            top: 16px;
+            opacity: .6
+        }
+
+        .table-box {
+            background: rgba(255, 255, 255, .08);
+            backdrop-filter: blur(16px);
+            padding: 20px;
+            border-radius: 25px;
+            overflow: auto;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .25)
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        th {
+            padding: 18px;
+            font-size: 14px;
+            background: rgba(255, 255, 255, .06)
+        }
+
+        td {
+            padding: 18px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, .03)
+        }
+
+        .badge {
             display: inline-block;
-            padding: 0.3rem 0.6rem;
-            background: #00e5ff;
-            color: #121212;
-            font-weight: 600;
-            border-radius: 5px;
-            font-size: 0.85rem;
-            margin-left: 0.5rem;
+            padding: 8px 14px;
+            border-radius: 30px;
+            background: #10b981;
+            font-size: 12px;
+            font-weight: 600
         }
 
-        /* Summary */
-        .summary {
-            margin-top: 2rem;
-            background: #1e1e1e;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
-            border-left: 4px solid #00bcd4;
+        .discount {
+            color: #22c55e;
+            font-weight: 700
         }
 
-        .summary h2 {
-            color: #00bcd4;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        .edit {
+            padding: 8px 14px;
+            background: #3b82f6;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 13px
         }
 
-        /* Responsive Table-Like Layout inside Card */
-        .card-details {
+        .delete {
+            padding: 8px 14px;
+            background: #ef4444;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 13px;
+            margin-left: 8px
+        }
+
+        .total-box {
+            margin-top: 25px;
+            background: linear-gradient(90deg, #06b6d4, #2563eb);
+            padding: 25px;
+            border-radius: 22px;
+            font-size: 26px;
+            font-weight: 700;
+            text-align: right;
+            box-shadow: 0 8px 30px rgba(59, 130, 246, .4)
+        }
+
+        .success {
+            padding: 15px;
+            margin-bottom: 20px;
+            background: #22c55e;
+            border-radius: 12px
+        }
+
+        /* PREMIUM PAGINATION */
+
+        .pagination-box {
             display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-top: 0.5rem;
+            justify-content: center;
+            margin-top: 35px;
+            margin-bottom: 20px;
         }
 
-        .card-details div {
-            width: 48%;
-            margin-bottom: 0.5rem;
+        .custom-pagination {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-        /* Subtotal/Discount/Tax Styling */
-        .card-details strong {
-            color: #fff;
+        .custom-pagination li {
+            list-style: none;
+        }
+
+        .custom-pagination li a,
+        .custom-pagination li span {
+
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+
+            color: white;
+
+            background: rgba(255, 255, 255, .08);
+
+            backdrop-filter: blur(20px);
+
+            border: 1px solid rgba(255, 255, 255, .08);
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, .25);
+
+            transition: .3s;
+        }
+
+        .custom-pagination li a:hover {
+
+            transform: translateY(-4px);
+
+            background:
+                linear-gradient(90deg,
+                    #06b6d4,
+                    #3b82f6);
+        }
+
+        .custom-pagination .active span {
+
+            background:
+                linear-gradient(90deg,
+                    #06b6d4,
+                    #3b82f6);
+        }
+
+        .custom-pagination .disabled {
+
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            opacity: .4;
+
+            background:
+                rgba(255, 255, 255, .05);
+        }
+
+        @media(max-width:768px) {
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start
+            }
+
+            .buttons {
+                width: 100%
+            }
+
+            .btn {
+                flex: 1;
+                text-align: center
+            }
+
         }
     </style>
 </head>
 
 <body>
 
-    <header>🛒 Cart Details</header>
     <div class="container">
-        <a href="/create-product" class="btn">➕ Add New Product</a>
-        <a href="/clear-cart" class="btn">🗑 Clear Cart</a>
 
-        <h2>Cart Items</h2>
-        <div class="products">
-            @php $grandTotal = 0; @endphp
-            @foreach($cart as $item)
-                @php
-                    $productTotal = $item['price'] * $item['quantity'];
-                    $discount = ($productTotal * 5) / 100; // 5% global discount
-                    $couponDiscount = $item['coupon_discount'] ?? 0;
-                    $discount += ($productTotal * $couponDiscount) / 100;
-                    $totalAfterDiscount = $productTotal - $discount;
-                    $tax = ($totalAfterDiscount * 18) / 100;
-                    $finalTotal = $totalAfterDiscount + $tax;
-                    $grandTotal += $finalTotal;
-                @endphp
-                <div class="card">
-                    <h3>{{ $item['name'] }}
-                        @if(!empty($item['coupon']))
-                            <span class="coupon-badge">{{ $item['coupon'] }} ({{ $item['coupon_discount'] }}% off)</span>
-                        @endif
-                    </h3>
+        <div class="header">
 
-                    <div class="card-details">
-                        <div><strong>Price:</strong> ₹{{ number_format($item['price'], 2) }}</div>
-                        <div><strong>Quantity:</strong> {{ $item['quantity'] }}</div>
-                        <div><strong>Subtotal:</strong> ₹{{ number_format($productTotal, 2) }}</div>
-                        <div><strong>Discount:</strong> ₹{{ number_format($discount, 2) }}</div>
-                        <div><strong>Tax (18%):</strong> ₹{{ number_format($tax, 2) }}</div>
-                        <div><strong>Final Total:</strong> ₹{{ number_format($finalTotal, 2) }}</div>
-                    </div>
-                </div>
-            @endforeach
+            <div class="heading">
+                <h1>Discountify Dashboard</h1>
+                <p>Smart Coupon & Cart Analytics System</p>
+            </div>
+
+            <div class="buttons">
+                <a href="/create-product" class="btn">+ Add Product</a>
+                <a href="/clear-cart" class="btn">Clear Cart</a>
+            </div>
+
         </div>
 
-        <div class="summary">
-            <h2>Grand Total: ₹{{ number_format($grandTotal, 2) }}</h2>
+        <div class="analytics">
+
+            <div class="card">
+                <h4>Total Products</h4>
+                <h2>{{$totalProducts}}</h2>
+            </div>
+
+            <div class="card">
+                <h4>Total Cart Value</h4>
+                <h2>₹{{$totalValue}}</h2>
+            </div>
+
+            <div class="card">
+                <h4>Total Saved</h4>
+                <h2>₹{{$totalSaved}}</h2>
+            </div>
+
+            <div class="card">
+                <h4>Most Used Coupon</h4>
+                <h2>{{$mostUsedCoupon}}</h2>
+            </div>
+
+        </div>
+
+        @if(session('success'))
+        <div class="success">
+            {{session('success')}}
+        </div>
+        @endif
+
+        <div class="search">
+            <span>🔍</span>
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Search product by name...">
+        </div>
+
+        <div class="table-box">
+
+            <table id="table">
+
+                <thead>
+
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Subtotal</th>
+                        <th>Coupon</th>
+                        <th>Discount</th>
+                        <th>Final Price</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @php $grand=0; @endphp
+
+                    @foreach($cart as $item)
+
+                    @php
+                    $total=$item->price*$item->quantity;
+                    $discount=($total*$item->coupon_discount)/100;
+                    $final=$total-$discount;
+                    $grand+=$final;
+                    @endphp
+
+                    <tr>
+
+                        <td>{{$item->name}}</td>
+                        <td>₹{{$item->price}}</td>
+                        <td>{{$item->quantity}}</td>
+                        <td>₹{{$total}}</td>
+
+                        <td>
+
+                            @if($item->coupon)
+
+                            <span class="badge">
+                                {{$item->coupon}}
+                            </span>
+
+                            @else
+
+                            -
+
+                            @endif
+
+                        </td>
+
+                        <td class="discount">
+                            {{$item->coupon_discount}}%
+                        </td>
+
+                        <td>
+                            ₹{{$final}}
+                        </td>
+
+                        <td>
+
+                            <a href="/edit/{{$item->id}}" class="edit">
+                                Edit
+                            </a>
+
+                            <a href="/delete/{{$item->id}}" class="delete">
+                                Delete
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    @endforeach
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="pagination-box">
+
+            @if($cart->hasPages())
+
+            <ul class="custom-pagination">
+
+                {{-- Previous --}}
+
+                @if($cart->onFirstPage())
+
+                <li class="disabled">
+                    ‹
+                </li>
+
+                @else
+
+                <li>
+                    <a href="{{$cart->previousPageUrl()}}">
+                        ‹
+                    </a>
+                </li>
+
+                @endif
+
+
+                {{-- Page Numbers --}}
+
+                @for($i=1;$i<=$cart->lastPage();$i++)
+
+                    @if($i==$cart->currentPage())
+
+                    <li class="active">
+                        <span>{{$i}}</span>
+                    </li>
+
+                    @else
+
+                    <li>
+                        <a href="{{$cart->url($i)}}">
+                            {{$i}}
+                        </a>
+                    </li>
+
+                    @endif
+
+                    @endfor
+
+
+                    {{-- Next --}}
+
+                    @if($cart->hasMorePages())
+
+                    <li>
+                        <a href="{{$cart->nextPageUrl()}}">
+                            ›
+                        </a>
+                    </li>
+
+                    @else
+
+                    <li class="disabled">
+                        ›
+                    </li>
+
+                    @endif
+
+            </ul>
+
+            @endif
+
+        </div>
+
+        <div class="total-box">
+            Grand Total : ₹{{$grand}}
         </div>
 
     </div>
+
+    <script>
+        document
+            .getElementById("search")
+            .addEventListener("keyup", function() {
+
+                let value = this.value.toLowerCase();
+
+                let rows = document.querySelectorAll(
+                    "#table tbody tr"
+                );
+
+                rows.forEach(row => {
+
+                    row.style.display =
+                        row.innerText
+                        .toLowerCase()
+                        .includes(value) ?
+                        "" :
+                        "none";
+
+                });
+
+            });
+    </script>
+
 </body>
 
 </html>

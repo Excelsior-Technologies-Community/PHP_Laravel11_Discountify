@@ -13,3 +13,7 @@ Route::get('/create-product', [CartController::class, 'create']); // Show create
 Route::post('/add-product', [CartController::class, 'store']);    // Add product to cart
 Route::get('/clear-cart', [CartController::class, 'clear']);      // Clear cart (optional)
 
+Route::get('/delete/{index}', [CartController::class, 'delete']);
+Route::get('/edit/{id}', [CartController::class, 'edit']);
+Route::post('/update/{index}', [CartController::class, 'update']);
+
