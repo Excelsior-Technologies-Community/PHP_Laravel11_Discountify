@@ -1,0 +1,23 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('products', function (Blueprint $table) {
+            $table->decimal('flash_discount', 5, 2)->default(0)->after('coupon_discount');
+            $table->timestamp('flash_sale_ends_at')->nullable()->after('flash_discount');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn(['flash_discount', 'flash_sale_ends_at']);
+        });
+    }
+};

@@ -222,10 +222,17 @@
         <div class="logo">
             Discountify
         </div>
-
-        <a href="/cart" class="back">
-            ← Back
-        </a>
+        <div style="display:flex;align-items:center;gap:12px">
+            @if($flashActive)
+            <span style="background:linear-gradient(90deg,#f59e0b,#ef4444);padding:8px 14px;border-radius:10px;font-size:13px;font-weight:600">⚡ Flash Sale {{ $flashSale['discount'] }}% OFF Active!</span>
+            @endif
+            <a href="/cart" class="back" style="position:relative">
+                ← Back to Cart
+                @if($cartCount > 0)
+                <span style="position:absolute;top:-8px;right:-8px;background:#ef4444;color:white;border-radius:50%;width:20px;height:20px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center">{{ $cartCount }}</span>
+                @endif
+            </a>
+        </div>
 
     </div>
 
@@ -327,6 +334,10 @@
 
                     <div class="coupon-detail">
                         Expiry: {{$coupon['expiry']}}
+                    </div>
+
+                    <div class="coupon-detail">
+                        Max Uses: {{$coupon['max_uses']}}
                     </div>
 
                 </div>
